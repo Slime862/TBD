@@ -16,6 +16,7 @@ public sealed class WindowsTransparentWindow : MonoBehaviour
     [SerializeField] private Canvas targetCanvas;
     [SerializeField] private RectTransform[] interactiveRoots = Array.Empty<RectTransform>();
     [SerializeField] private RectTransform[] draggableRoots = Array.Empty<RectTransform>();
+    private bool interactionLocked;
 #pragma warning disable 0414
     [SerializeField] private bool topMost = true;
     [SerializeField] private bool borderless = true;
@@ -78,6 +79,17 @@ public sealed class WindowsTransparentWindow : MonoBehaviour
 #endif
     }
 
+    public void SetInteractionLocked(bool locked)
+    {
+        interactionLocked = locked;
+#if UNITY_STANDALONE_WIN && !UNITY_EDITOR
+        if (windowHandle != IntPtr.Zero && locked)
+        {
+            SetClickThrough(false);
+        }
+#endif
+    }
+
 #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
     private void Start()
     {
@@ -89,6 +101,12 @@ public sealed class WindowsTransparentWindow : MonoBehaviour
     {
         if (windowHandle == IntPtr.Zero)
         {
+            return;
+        }
+
+        if (interactionLocked)
+        {
+            SetClickThrough(false);
             return;
         }
 

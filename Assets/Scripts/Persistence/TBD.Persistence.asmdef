@@ -1,0 +1,16 @@
+{
+  "name": "TBD.Persistence",
+  "rootNamespace": "TBD.Persistence",
+  "references": [
+    "TBD.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

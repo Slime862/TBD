@@ -11,6 +11,11 @@ public static class HangoutHudFactory
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void BuildRuntimeHud()
     {
+        if (Object.FindObjectOfType<TBD.Prototype.TbdGameController>() != null)
+        {
+            return;
+        }
+
         EnsureSceneReady();
     }
 
